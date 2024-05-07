@@ -1,0 +1,26 @@
+1.Current Week Revenue 
+
+Current_Week_Revenue = CALCULATE(
+     SUM('public cc_detail'[Revenue]),
+     FILTER(
+            ALL('public cc_detail'),
+            'public cc_detail'[WeekNumber2] - MAX('public cc_detail'[WeekNumber2])))
+
+2.Perivous Week Revenue 
+
+Pervious_week_Revenue = CALCULATE(
+     SUM('public cc_detail'[Revenue]),
+     FILTER(
+            ALL('public cc_detail'),
+            'public cc_detail'[WeekNumber2] - MAX('public cc_detail'[WeekNumber2]))) 
+
+3.Wow Revenue 
+wow_revenue = DIVIDE(('public cc_detail'[Current_Week_Revenue]- 'public cc_detail'[Pervious_week_Revenue]), 'public cc_detail'[Pervious_week_Revenue])
+
+4.Revenue 
+Revenue = 'public cc_detail'[annual_fees] + 'public cc_detail'[total_trans_amt] + 'public cc_detail'[interest_earned]
+
+5.Week Number 2 
+WeekNumber2 = WEEKNUM('public cc_detail'[week_start_date] )
+
+
